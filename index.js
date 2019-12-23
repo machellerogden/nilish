@@ -3,6 +3,7 @@
 const { inspect } = require('util');
 const _ = exports;
 const nt = new Set(['string', 'number']);
+const SYM_META = Symbol('nilish.meta');
 _.nil = void 0;
 _.identity = v => v;
 _.isArray = Array.isArray;
@@ -58,3 +59,11 @@ _.pprint = (...a) =>
             ? inspect(v, { depth: 8, colors: true })
             : String(v)).join(' ')
     }`);
+_.meta = v => _.isNil(v) ? _.nil : _.clone(v[SYM_META]) || {};
+_.withMeta = (target, data) => {
+    if (_.isNil(target)) return _.nil;
+    const result = _.clone(target);
+    const boxed = _.box(result);
+    boxed[SYM_META] = data;
+    return boxed;
+};
