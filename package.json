@@ -1,6 +1,6 @@
 {
   "name": "nilish",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "fn-lite nil punning",
   "main": "index.js",
   "scripts": {
